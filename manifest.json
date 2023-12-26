@@ -1,7 +1,7 @@
 {
 	"id": "loglink-plugin-obsidian",
 	"name": "LogLink",
-	"version": "0.2.0",
+	"version": "0.2.2",
 	"minAppVersion": "0.15.0",
 	"description": "Allows you to add to your Obsidian graph from mobile apps such as Telegram.",
 	"author": "hankhank10",
