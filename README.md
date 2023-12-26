@@ -1,96 +1,53 @@
-# Obsidian Sample Plugin
+# LogLink Plugin
+    
+**NOTE: This project is under development (as of 26 Dec 2024) only available in closed beta. If you want to sign up for the beta you can [here](https://form.jotform.com/230035811319043)**
 
-This is a sample plugin for Obsidian (https://obsidian.md).
+LogLink allows you to add to your Obsidian graph more easily from a variety of sources, with a focus on mobile.
 
-This project uses Typescript to provide type checking and documentation.
-The repo depends on the latest plugin API (obsidian.d.ts) in Typescript Definition format, which contains TSDoc comments describing what it does.
+You can read all about LogLink at [https://loglink.it](https://loglink.it)
 
-**Note:** The Obsidian API is still in early alpha and is subject to change at any time!
+Quick demo:
 
-This sample plugin demonstrates some of the basic functionality the plugin API can do.
-- Adds a ribbon icon, which shows a Notice when clicked.
-- Adds a command "Open Sample Modal" which opens a Modal.
-- Adds a plugin setting tab to the settings page.
-- Registers a global click event and output 'click' to the console.
-- Registers a global interval which logs 'setInterval' to the console.
+![](plugin_demo2.gif)
 
-## First time developing plugins?
+## Integrations
 
-Quick starting guide for new plugin devs:
+Functioning integrations:
+- Telegram
 
-- Check if [someone already developed a plugin for what you want](https://obsidian.md/plugins)! There might be an existing plugin similar enough that you can partner up with.
-- Make a copy of this repo as a template with the "Use this template" button (login to GitHub if you don't see it).
-- Clone your repo to a local development folder. For convenience, you can place this folder in your `.obsidian/plugins/your-plugin-name` folder.
-- Install NodeJS, then run `npm i` in the command line under your repo folder.
-- Run `npm run dev` to compile your plugin from `main.ts` to `main.js`.
-- Make changes to `main.ts` (or create new `.ts` files). Those changes should be automatically compiled into `main.js`.
-- Reload Obsidian to load the new version of your plugin.
-- Enable plugin in settings window.
-- For updates to the Obsidian API run `npm update` in the command line under your repo folder.
+Planned integrations:
+- WhatsApp
+- Email
+- Discord (maybe)
+- Slack (maybe)
 
-## Releasing new releases
+## Workflow
 
-- Update your `manifest.json` with your new version number, such as `1.0.1`, and the minimum Obsidian version required for your latest release.
-- Update your `versions.json` file with `"new-plugin-version": "minimum-obsidian-version"` so older versions of Obsidian can download an older version of your plugin that's compatible.
-- Create new GitHub release using your new version number as the "Tag version". Use the exact version number, don't include a prefix `v`. See here for an example: https://github.com/obsidianmd/obsidian-sample-plugin/releases
-- Upload the files `manifest.json`, `main.js`, `styles.css` as binary attachments. Note: The manifest.json file must be in two places, first the root path of your repository and also in the release.
-- Publish the release.
+The simple workflow is that you send a message from your phone (or desktop) via Telegram. You can send text (including special terms like TODO, [[links]] or #hashtags), locations (which resolve nicely including a goodle maps link) or images/videos (which are automatically uploaded to imgur and then inserted into your graph). The service stores these messages until you log into LogSeq on desktop and sync them to your graph via a slash command, at which point they are deleted from the server.
 
-> You can simplify the version bump process by running `npm version patch`, `npm version minor` or `npm version major` after updating `minAppVersion` manually in `manifest.json`.
-> The command will bump version in `manifest.json` and `package.json`, and add the entry for the new version to `versions.json`
+I use this to quickly add to my todo list (eg send a Telegram message saying `TODO Buy milk` or `TODO Call [[John Smith]]`), send myself quick notes or send images of things I want to remember (eg a photo of a book I want to read).
 
-## Adding your plugin to the community plugin list
+I am keen to find an intrepid group (5-10) of beta testers to help me test this out. I am even more keen to find anyone keen to collaborate with on this.
 
-- Check https://github.com/obsidianmd/obsidian-releases/blob/master/plugin-review.md
-- Publish an initial version.
-- Make sure you have a `README.md` file in the root of your repo.
-- Make a pull request at https://github.com/obsidianmd/obsidian-releases to add your plugin.
+If you are interested in either (after reading the important security disclaimer below) then please register interest by either:
+- Completing this form https://form.jotform.com/230035811319043
+- Raising an issue on this repo offering assistance
+- Diving right in by forking and raising a PR
 
-## How to use
+For potential collaborators, the tech stack is:
+- Python/Flask/SQLAlchemy on the backend (which I have covered, although anyone with encryption/security experience would be very welcome);
+- JS for the plugin (which I could dearly use some assistance with);
+- the front end web app/landing page will be build in HTML+Tailwind (again, help very much appreciated here).
 
-- Clone this repo.
-- Make sure your NodeJS is at least v16 (`node --version`).
-- `npm i` or `yarn` to install dependencies.
-- `npm run dev` to start compilation in watch mode.
+- The service will be free to begin with. I have no aim to run this commercially, although at some point I may have to charge a nominal fee in due course if I start to incur costs (eg for whatsapp or imgur API usage beyond the free plans).
 
-## Manually installing the plugin
+## Security
+You should read the important security disclaimer here: https://loglink.it/security-notice
 
-- Copy over `main.js`, `styles.css`, `manifest.json` to your vault `VaultFolder/.obsidian/plugins/your-plugin-id/`.
+## Open source
+The server and plugin are both open source, so you are welcome to read the source code (github links both below) and you could also use the source code to run your own server.
 
-## Improve code quality with eslint (optional)
-- [ESLint](https://eslint.org/) is a tool that analyzes your code to quickly find problems. You can run ESLint against your plugin to find common bugs and ways to improve your code. 
-- To use eslint with this project, make sure to install eslint from terminal:
-  - `npm install -g eslint`
-- To use eslint to analyze this project use this command:
-  - `eslint main.ts`
-  - eslint will then create a report with suggestions for code improvement by file and line number.
-- If your source code is in a folder, such as `src`, you can use eslint with this command to analyze all files in that folder:
-  - `eslint .\src\`
-
-## Funding URL
-
-You can include funding URLs where people who use your plugin can financially support it.
-
-The simple way is to set the `fundingUrl` field to your link in your `manifest.json` file:
-
-```json
-{
-    "fundingUrl": "https://buymeacoffee.com"
-}
-```
-
-If you have multiple URLs, you can also do:
-
-```json
-{
-    "fundingUrl": {
-        "Buy Me a Coffee": "https://buymeacoffee.com",
-        "GitHub Sponsor": "https://github.com/sponsors",
-        "Patreon": "https://www.patreon.com/"
-    }
-}
-```
-
-## API Documentation
-
-See https://github.com/obsidianmd/obsidian-api
+## Links
+- Server: https://github.com/hankhank10/loglink-server
+- Plugin: https://github.com/hankhank10/loglink-plugin
+- Docs: https://loglink.it/
